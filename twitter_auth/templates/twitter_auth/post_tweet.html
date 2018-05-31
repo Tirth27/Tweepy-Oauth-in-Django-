@@ -1,0 +1,16 @@
+{% extends "twitter_auth/base.html" %}
+{% block content %}
+	<div id="container">	
+		<form action="{% url 'twitter_auth.views.post_tweet' %}" method="POST">
+			{% csrf_token %}
+    			<label for="label">Enter Tweet: </label>
+    			<input id="entered_tweet" type="text" name="input_tweet"/>
+    			<input type="submit" value="Post">
+		</form>
+	</div>
+	<div id="container">
+		{% include "twitter_auth/includes/GotoTimelineSnippet.html" %}
+		<hr>
+		{% include "twitter_auth/includes/GotoHomeSnippet.html" %}
+	</div>
+{% endblock %}

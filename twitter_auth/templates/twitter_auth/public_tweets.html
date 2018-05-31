@@ -1,0 +1,15 @@
+{% extends "twitter_auth/base.html" %}
+
+{% block content %}
+	<div id="container">
+		{% include "twitter_auth/includes/GotoPostSnippet.html" %}
+		<hr>
+		{% include "twitter_auth/includes/GotoHomeSnippet.html" %}
+	</div>
+	<div id="container">			
+		{% for tweet in public_tweets %}
+    			<p>{{ tweet.text }}</p>
+		{% endfor %}
+	</div>
+{% endblock %}
+
