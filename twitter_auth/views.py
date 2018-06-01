@@ -1,4 +1,4 @@
-# Create your views here.
+
 import tweepy
 from django.http import *
 from django.shortcuts import render_to_response
@@ -6,8 +6,8 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth import logout
 
 from django.shortcuts import render
-import re
-from twitter_auth.forms import PostTweet
+import re #import regular expression
+from twitter_auth.forms import PostTweet #import form
 
 from twitter_auth.utils import *
 
@@ -17,9 +17,9 @@ def main(request):
 	"""
 	# if we haven't authorised yet, direct to login page
 	if check_key(request):
-		return HttpResponseRedirect(reverse('info'))
+		return HttpResponseRedirect(reverse('info')) #goto info
 	else:
-		return render_to_response('twitter_auth/login.html')
+		return render_to_response('twitter_auth/login.html') #goto login
 
 def unauth(request):
 	"""
@@ -90,26 +90,32 @@ def check_key(request):
 
 #read tweet from home_timeline
 def home_timeline(request):
-    api = get_api(request)
-    public_tweets = api.home_timeline()
+    if check_key(request):
+    	api = get_api(request)
+    	public_tweets = api.home_timeline()
 
-    return render(request, 'twitter_auth/public_tweets.html', {'public_tweets': public_tweets})
+    	return render(request, 'twitter_auth/public_tweets.html', {'public_tweets': public_tweets})
+    else:
+        return render_to_response('twitter_auth/login.html') #goto login
 
-    
+#post tweet    
 def post_tweet(request):
    tweet = "not logged in"
-   
-   if request.method == "POST":
-      #Get the posted form
-      MyPostTweet = PostTweet(request.POST)
-      
-      if MyPostTweet.is_valid():
-        tweet = request.POST.get("input_tweet", "")
-        api = get_api(request)
-        api.update_status(tweet)
-
-   else:
-      MyPostTweet = PostTweet()
+   if check_key(request):
+       	if request.method == "POST":
+              #Get the posted form
+              MyPostTweet = PostTweet(request.POST)
+              if MyPostTweet.is_valid():
+                #get user input
+                tweet = request.POST.get("input_tweet", "")
+                api = get_api(request)
+                #update status
+                api.update_status(tweet)
+       	else:
+          		MyPostTweet = PostTweet()
 		
-   return render(request, 'twitter_auth/post_tweet.html', {"tweet" : tweet})
+        return render(request, 'twitter_auth/post_tweet.html', {"tweet" : tweet})
+    
+   else:
+        return render_to_response('twitter_auth/login.html') #goto login
     
