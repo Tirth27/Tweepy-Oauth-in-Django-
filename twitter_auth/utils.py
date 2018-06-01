@@ -1,7 +1,7 @@
 import tweepy
 
-CONSUMER_KEY = 'kHPHMnOrnNTId2usSTlH3Gx6l'
-CONSUMER_SECRET = 'xm6KqejBPZeuqaUK2fq5bufKX5PeDXnzkMEHPdxCH1TtKXFIp3'
+CONSUMER_KEY = 'Enter_your_key'
+CONSUMER_SECRET = 'Enter_your_secret'
  
 
 def get_api(request):
