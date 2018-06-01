@@ -112,6 +112,7 @@ def post_tweet(request):
               if MyPostTweet.is_valid():
                 #get user input
                 tweet = request.POST.get("input_tweet", "")
+<<<<<<< HEAD
                 Approval=pf.is_profane(tweet)
                  #applying profanity for explicit content detection
                  #it won't allow post any explicit tweets
@@ -124,6 +125,11 @@ def post_tweet(request):
                   api = get_api(request)
                   #update status
                   api.update_status(tweet)
+=======
+                api = get_api(request)
+                #update status
+                api.update_status(tweet)
+>>>>>>> 6c01f8e1d613d049cf73199a78c9d1339cf9726e
        	else:
           		MyPostTweet = PostTweet()
 		
