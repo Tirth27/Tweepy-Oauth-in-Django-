@@ -1,16 +1,12 @@
-
-import tweepy
+import tweepy #API for twitter
 from django.http import *
 from django.shortcuts import render_to_response
 from django.core.urlresolvers import reverse
 from django.contrib.auth import logout
 from django.contrib import messages
-
 from django.shortcuts import render
-import re #import regular expression
 from twitter_auth.forms import PostTweet #import form
-
-from twitter_auth.utils import *
+from twitter_auth.utils import * 
 from profanityfilter import ProfanityFilter #it's a library for detecting proform word in any given list
 
 pf = ProfanityFilter()
@@ -33,7 +29,7 @@ def unauth(request):
 		api = get_api(request)
 		request.session.clear()
 		logout(request)
-	return HttpResponseRedirect(reverse('main'))
+	return HttpResponseRedirect(reverse('main')) #goto main()
 
 def info(request):
 	"""
@@ -95,8 +91,8 @@ def check_key(request):
 #read tweet from home_timeline
 def home_timeline(request):
     if check_key(request):
-    	api = get_api(request)
-    	public_tweets = api.home_timeline()
+    	api = get_api(request) #Oauth user
+    	public_tweets = api.home_timeline() #get homepage tweets
 
     	return render(request, 'twitter_auth/public_tweets.html', {'public_tweets': public_tweets})
     else:
@@ -112,7 +108,6 @@ def post_tweet(request):
               if MyPostTweet.is_valid():
                 #get user input
                 tweet = request.POST.get("input_tweet", "")
-<<<<<<< HEAD
                 Approval=pf.is_profane(tweet)
                  #applying profanity for explicit content detection
                  #it won't allow post any explicit tweets
@@ -125,11 +120,6 @@ def post_tweet(request):
                   api = get_api(request)
                   #update status
                   api.update_status(tweet)
-=======
-                api = get_api(request)
-                #update status
-                api.update_status(tweet)
->>>>>>> 6c01f8e1d613d049cf73199a78c9d1339cf9726e
        	else:
           		MyPostTweet = PostTweet()
 		

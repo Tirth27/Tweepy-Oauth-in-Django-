@@ -1,6 +1,6 @@
 from django import forms
 
-# Create your tests here.
+# Create your forms here.
 
 class PostTweet(forms.Form):
 	input_tweet = forms.CharField()

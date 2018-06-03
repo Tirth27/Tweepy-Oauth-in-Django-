@@ -1,4 +1,5 @@
-"""djangotweepy URL Configuration
+"""
+djangotweepy URL Configuration
 """
 
 from django.conf.urls import *
