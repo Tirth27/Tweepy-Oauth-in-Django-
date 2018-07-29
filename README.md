@@ -43,6 +43,6 @@ python manage.py runserver
 
 ## Credits
 
-The credit for this project goes to @github/Tirth27  and @github/PatrioticParth
+The credit for this project goes to [@github/Tirth27](https://github.com/Tirth27)  and [@github/PatrioticParth](https://github.com/PatrioticParth)
 
 
